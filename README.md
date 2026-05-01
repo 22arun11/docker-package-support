@@ -1,46 +1,65 @@
-# Docker Project Scaffolder
+# dockgen — Docker Project Scaffold
 
-A tool to quickly scaffold Dockerised projects for Python, React, and Angular — with a single interactive terminal script.
+A CLI tool to scaffold Dockerised projects for Python, FastAPI, React, Vue, Next.js, and Angular — with a fully interactive terminal UI and arrow-key navigation.
 
 ## Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) running
-- macOS / Linux with `bash`
+- macOS with `bash` and `zsh`
+
+## Installation
+
+```bash
+git clone https://github.com/22arun11/docker-package-support.git
+cd docker-package-support
+chmod +x install.sh
+./install.sh
+source ~/.zshrc
+```
+
+The installer creates a `dockgen` command at `~/.local/bin/dockgen` and adds it to your PATH.  
+> **Note:** If you move the repo folder later, re-run `./install.sh` from the new location to update the path.
 
 ## Usage
 
 ```bash
-./create_project.sh
+dockgen
 ```
 
-The script walks you through four prompts:
+The script walks you through an interactive arrow-key UI:
 
-1. **Project type** — choose Python, React, or Angular
-2. **Version** — pick the Python or Node version to use
+1. **Project type** — arrow-key select from Python, FastAPI, React, Vue, NextJS, Angular
+2. **Version** — pick the Python or Node version
 3. **Project name** — no spaces allowed
-4. **Location** — shows existing folders inside `~/Developer/` as a hint; enter a sub-path relative to it, or leave empty to create directly inside `~/Developer/<name>`
+4. **Location** — browse your filesystem with arrow keys, navigate into folders, or create a new subfolder
 
 **Example session:**
 ```
-Select project type:
-1) Python  2) FastAPI  3) React  4) Vue  5) NextJS  6) Angular
-? 2
+  Select project type
+  ▶ Python
+    FastAPI
+    React
+    Vue
+    NextJS
+    Angular
 
-Select Node version:
-1) 22  2) 20  3) 18
-? 1
+  Select Python version
+  ▶ 3.12
+    3.11
+    3.10
 
-Project name (no spaces): my-react-app
+  Project name: my-api
 
-Base path: /Users/you/Developer
-
-Folders available in /Users/you/Developer:
-  Angular/
-  Python-Project/
-
-Enter a sub-path relative to /Users/you/Developer (e.g. Projects/my-react-app)
-Or leave empty to use: /Users/you/Developer/my-react-app
->
+  ╭────────────────────────────────────────────────────╮
+  │  /Users/you/Developer                              │
+  ├────────────────────────────────────────────────────┤
+  │ > [confirm] Use this folder                        │
+  │   [new]     Create subfolder here                  │
+  │   [..]      Go up                                  │
+  │   1  Projects                                      │
+  │   2  Work                                          │
+  ╰────────────────────────────────────────────────────╯
+  arrows move  enter select  [new] = new folder
 ```
 
 Once scaffolded:
@@ -88,6 +107,7 @@ docker compose up --build
 ```
 docker-package-support/
 ├── create_project.sh    # The scaffold script
+├── install.sh           # Installs `dockgen` command globally
 ├── README.md
 └── Templates/
     ├── Python/          # Dockerfile, docker-compose.yml, main.py, requirements.txt

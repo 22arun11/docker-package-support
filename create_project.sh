@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "$0")" && pwd)"
+# Resolve true script location even when called through a symlink
+_self="${BASH_SOURCE[0]}"
+while [[ -L "$_self" ]]; do
+  _dir="$(cd "$(dirname "$_self")" && pwd)"
+  _self="$_dir/$(readlink "$_self")"
+done
+repo_root="$(cd "$(dirname "$_self")" && pwd)"
 
 # ── Arrow-key menu ────────────────────────────────────────────────────────
 # Usage: pick "Prompt" item1 item2 ...
@@ -75,7 +81,7 @@ browse_dir() {
     local entries=("$@")
     local n=${#entries[@]}
     if [[ $__drawn -gt 0 ]]; then
-      tput cuu "$__drawn"
+      tput cuu "$__drawn"; tput ed
     fi
     local bar; bar=$(printf '%*s' "$W" '' | tr ' ' '─')
     local pathdisp="$cur"
@@ -103,8 +109,10 @@ browse_dir() {
     entries+=("[confirm] Use this folder")
     entries+=("[new]     Create subfolder here")
     [[ "$cur" != "/" ]] && entries+=("[..]      Go up")
+    local _idx=1
     while IFS= read -r -d '' d; do
-      entries+=("$(basename "$d")")
+      entries+=("$_idx  $(basename "$d")")
+      (( _idx++ ))
     done < <(find "$cur" -maxdepth 1 -mindepth 1 -type d -not -name '.*' -print0 2>/dev/null | sort -z)
 
     local n=${#entries[@]}
@@ -143,7 +151,9 @@ browse_dir() {
         cur="$(dirname "$cur")"
         sel=0
       else
-        cur="$cur/$chosen"
+        # strip leading number prefix "N  " before the folder name
+        local dirname="${chosen#*  }"
+        cur="$cur/$dirname"
         sel=0
       fi
     fi
