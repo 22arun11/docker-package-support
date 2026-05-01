@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["bash","-c","pip install --no-cache-dir -r requirements.txt && python main.py"]
