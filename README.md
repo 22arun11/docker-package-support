@@ -23,7 +23,7 @@ The script walks you through four prompts:
 **Example session:**
 ```
 Select project type:
-1) Python  2) React  3) Angular
+1) Python  2) FastAPI  3) React  4) Vue  5) NextJS  6) Angular
 ? 2
 
 Select Node version:
@@ -57,10 +57,26 @@ docker compose up --build
 - Edit `main.py` to start building; add dependencies to `requirements.txt`
 - Runs on **http://localhost:8000**
 
+### FastAPI
+- Template files copied instantly
+- Edit `main.py` to start building; add dependencies to `requirements.txt`
+- API docs auto-available at **http://localhost:8000/docs**
+- Runs on **http://localhost:8000**
+
 ### React (Vite)
 - Scaffolded via `npm create vite@latest` inside Docker — always the latest React + Vite
 - Runs on **http://localhost:5173**
 - Takes ~1 min on first scaffold (pulls Node image)
+
+### Vue (Vite)
+- Scaffolded via `npm create vite@latest --template vue` inside Docker
+- Runs on **http://localhost:5173**
+- Takes ~1 min on first scaffold (pulls Node image)
+
+### Next.js
+- Scaffolded via `create-next-app` inside Docker — TypeScript, Tailwind, App Router included
+- Runs on **http://localhost:3000**
+- Takes ~1–2 min on first scaffold (pulls Node image)
 
 ### Angular
 - Scaffolded via `ng new` inside Docker — always the latest Angular CLI
@@ -75,7 +91,10 @@ docker-package-support/
 ├── README.md
 └── Templates/
     ├── Python/          # Dockerfile, docker-compose.yml, main.py, requirements.txt
+    ├── FastAPI/         # Dockerfile, docker-compose.yml, main.py, requirements.txt
     ├── React/           # Dockerfile, docker-compose.yml, .dockerignore
+    ├── Vue/             # Dockerfile, docker-compose.yml, .dockerignore
+    ├── NextJS/          # Dockerfile, docker-compose.yml, .dockerignore
     └── Angular/         # Dockerfile, docker-compose.yml, .dockerignore
 ```
 
@@ -84,5 +103,8 @@ docker-package-support/
 | Type    | URL                    |
 |---------|------------------------|
 | Python  | http://localhost:8000  |
+| FastAPI | http://localhost:8000  |
 | React   | http://localhost:5173  |
+| Vue     | http://localhost:5173  |
+| Next.js | http://localhost:3000  |
 | Angular | http://localhost:4200  |
