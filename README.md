@@ -1,11 +1,11 @@
 # Docker Project Scaffolder
 
-A tool to quickly scaffold Dockerised projects for Python, React, and Angular — with a single interactive script.
+A tool to quickly scaffold Dockerised projects for Python, React, and Angular — with a single interactive terminal script.
 
 ## Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) running
-- macOS (graphical folder picker uses the native macOS dialog)
+- macOS / Linux with `bash`
 
 ## Usage
 
@@ -13,52 +13,76 @@ A tool to quickly scaffold Dockerised projects for Python, React, and Angular �
 ./create_project.sh
 ```
 
-The script will guide you through three steps:
+The script walks you through four prompts:
 
-1. **Select project type** — a macOS dialog lets you choose Python, React, or Angular
-2. **Select target folder** — a native folder picker lets you browse to where you want the project created
-3. **Enter a project name** — typed in the terminal; the project is created at `<folder>/<name>`
+1. **Project type** — choose Python, React, or Angular
+2. **Version** — pick the Python or Node version to use
+3. **Project name** — no spaces allowed
+4. **Location** — shows existing folders inside `~/Developer/` as a hint; enter a sub-path relative to it, or leave empty to create directly inside `~/Developer/<name>`
+
+**Example session:**
+```
+Select project type:
+1) Python  2) React  3) Angular
+? 2
+
+Select Node version:
+1) 22  2) 20  3) 18
+? 1
+
+Project name (no spaces): my-react-app
+
+Base path: /Users/you/Developer
+
+Folders available in /Users/you/Developer:
+  Angular/
+  Python-Project/
+
+Enter a sub-path relative to /Users/you/Developer (e.g. Projects/my-react-app)
+Or leave empty to use: /Users/you/Developer/my-react-app
+>
+```
 
 Once scaffolded:
 
 ```bash
-cd <your-project-folder>
+cd ~/Developer/my-react-app
 docker compose up --build
 ```
 
 ## Project Types
 
 ### Python
-- Copies template files instantly
+- Template files copied instantly
+- Edit `main.py` to start building; add dependencies to `requirements.txt`
 - Runs on **http://localhost:8000**
-- Edit `main.py` to start building
-- Add dependencies to `requirements.txt`
 
 ### React (Vite)
-- Scaffolded via `npm create vite@latest` inside Docker — always uses the latest React + Vite
+- Scaffolded via `npm create vite@latest` inside Docker — always the latest React + Vite
 - Runs on **http://localhost:5173**
-- Takes ~1 min on first scaffold (pulls node image)
+- Takes ~1 min on first scaffold (pulls Node image)
 
 ### Angular
-- Scaffolded via `ng new` inside Docker — always uses the latest Angular CLI
+- Scaffolded via `ng new` inside Docker — always the latest Angular CLI
 - Runs on **http://localhost:4200**
-- Takes ~2 min on first scaffold (pulls node image + installs Angular CLI)
+- Takes ~2 min on first scaffold (pulls Node image + installs Angular CLI)
 
 ## Repository Structure
 
 ```
 docker-package-support/
-├── create_project.sh        # The scaffold script
+├── create_project.sh    # The scaffold script
+├── README.md
 └── Templates/
-    ├── Python/              # Dockerfile, docker-compose.yml, main.py, requirements.txt
-    ├── React/               # Dockerfile, docker-compose.yml, .dockerignore
-    └── Angular/             # Dockerfile, docker-compose.yml, .dockerignore
+    ├── Python/          # Dockerfile, docker-compose.yml, main.py, requirements.txt
+    ├── React/           # Dockerfile, docker-compose.yml, .dockerignore
+    └── Angular/         # Dockerfile, docker-compose.yml, .dockerignore
 ```
 
 ## Port Reference
 
-| Type    | URL                      |
-|---------|--------------------------|
-| Python  | http://localhost:8000    |
-| React   | http://localhost:5173    |
-| Angular | http://localhost:4200    |
+| Type    | URL                    |
+|---------|------------------------|
+| Python  | http://localhost:8000  |
+| React   | http://localhost:5173  |
+| Angular | http://localhost:4200  |
