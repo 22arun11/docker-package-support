@@ -173,9 +173,9 @@ project_type="$MENU_RESULT"
 # ── 2. Version ────────────────────────────────────────────────────────────
 case "$project_type" in
   Python|FastAPI) versions=("3.13" "3.12" "3.11" "3.10"); ver_label="Python version" ;;
-  React|Vue)      versions=("22" "20" "18");               ver_label="Node version" ;;
-  NextJS)         versions=("22" "20" "18");               ver_label="Node version" ;;
-  Angular)        versions=("22" "20");                    ver_label="Node version" ;;
+  React|Vue)      versions=("24" "22" "20" "18");           ver_label="Node version" ;;
+  NextJS)         versions=("24" "22" "20" "18");           ver_label="Node version" ;;
+  Angular)        versions=("24" "22" "20");               ver_label="Node version" ;;
 esac
 
 echo ""
