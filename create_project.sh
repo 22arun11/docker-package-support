@@ -45,18 +45,19 @@ if [[ -d "$default_base" ]]; then
   echo ""
 fi
 
-echo "Enter a sub-path relative to $default_base (e.g. Projects/my-app)"
+echo "Enter a sub-folder relative to $default_base to create the project in"
 echo "Or leave empty to use: $default_base/$name"
+echo "(e.g. type  Python-Project  to create at $default_base/Python-Project/$name)"
 read -p "> " target_input
 
 if [[ -z "$target_input" ]]; then
   target="$default_base/$name"
 elif [[ "$target_input" = /* ]]; then
-  # Absolute path override
-  target="$target_input"
+  # Absolute path — append project name
+  target="${target_input%/}/$name"
 else
-  # Relative to default base
-  target="$default_base/$target_input"
+  # Relative to default base — append project name
+  target="$default_base/${target_input%/}/$name"
 fi
 
 # ── 5. Create / validate target directory ────────────────────────────────
