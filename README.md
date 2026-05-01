@@ -35,18 +35,24 @@ The script walks you through an interactive arrow-key UI:
 
 **Example session:**
 ```
-  Select project type
-  ▶ Python
-    FastAPI
-    React
-    Vue
-    NextJS
-    Angular
+  ╭────────────────────────────────────────────────────╮
+  │  Select project type                               │
+  ├────────────────────────────────────────────────────┤
+  │ > Python                                           │
+  │   FastAPI                                          │
+  │   React                                            │
+  │   Vue                                              │
+  │   NextJS                                           │
+  │   Angular                                          │
+  ╰────────────────────────────────────────────────────╯
 
-  Select Python version
-  ▶ 3.12
-    3.11
-    3.10
+  ╭────────────────────────────────────────────────────╮
+  │  Select Python version                             │
+  ├────────────────────────────────────────────────────┤
+  │ > 3.12                                             │
+  │   3.11                                             │
+  │   3.10                                             │
+  ╰────────────────────────────────────────────────────╯
 
   Project name: my-api
 
